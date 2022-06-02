@@ -1,14 +1,36 @@
-const lines = 5;
-let result = '';
-// Проверяется именно переменная result, формируйте строку в ней
-for (let i = 0; i <= lines; i++) {
-    for (let j = 0; j < lines - i; j++) {
-        result += " ";
-    }
-    for (let j = 0; j < 2 * i + 1; j++) {
-        result += "*";
-    }
-    result += "\n";
+// Место для первой задачи
+function sayHello(name) {
+    return `Привет, ${name}`;
 }
 
-console.log(result)
+sayHello(`Alex`);
+
+// Место для второй задачи
+function returnNeighboringNumbers(number) {
+    let arr = [];
+    arr[0] = number - 1;
+    arr[1] = number;
+    arr[2] = number + 1;
+    return arr;
+}
+
+returnNeighboringNumbers(5);
+
+// Место для третьей задачи
+function getMathResult(num, pow) {
+    let string = "";
+    if(typeof(pow) !== "number" || pow <= 0) {
+        return num;
+    }
+    for(let i = 1; i <= pow; i++) {
+        num *= i;
+        if(i !== pow) {
+            string += `${num}---`;
+        } else {
+            string += num;
+        }
+    }
+    return string;
+}
+
+getMathResult(10, 5);
