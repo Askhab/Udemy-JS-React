@@ -1,36 +1,24 @@
 // Место для первой задачи
-function sayHello(name) {
-    return `Привет, ${name}`;
+function calculateVolumeAndArea(edge) {
+    const cubeVolume = edge * edge * edge;
+    const cubeSquare = 6 * (edge * edge);
+
+    if (!edge || edge <= 0 || typeof(edge) !== "number" || !Number.isInteger(edge)) {
+        return `При вычислении произошла ошибка`;
+    } else {
+        return `Объём куба: ${cubeVolume}, площадь всей поверхности: ${cubeSquare}`
+    }
 }
 
-sayHello(`Alex`);
+calculateVolumeAndArea(5);
 
 // Место для второй задачи
-function returnNeighboringNumbers(number) {
-    let arr = [];
-    arr[0] = number - 1;
-    arr[1] = number;
-    arr[2] = number + 1;
-    return arr;
+function getCoupeNumber(number) {
+    if (!number || !Number.isInteger(number) || number < 0) {
+
+    } else if (number >= 1 && number <= 36) {
+        return Math.ceil(number / 4);
+    }
 }
 
-returnNeighboringNumbers(5);
-
-// Место для третьей задачи
-function getMathResult(num, pow) {
-    let string = "";
-    if(typeof(pow) !== "number" || pow <= 0) {
-        return num;
-    }
-    for(let i = 1; i <= pow; i++) {
-        num *= i;
-        if(i !== pow) {
-            string += `${num}---`;
-        } else {
-            string += num;
-        }
-    }
-    return string;
-}
-
-getMathResult(10, 5);
+getCoupeNumber(17);
