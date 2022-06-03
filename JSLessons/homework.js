@@ -1,24 +1,33 @@
 // Место для первой задачи
-function calculateVolumeAndArea(edge) {
-    const cubeVolume = edge * edge * edge;
-    const cubeSquare = 6 * (edge * edge);
-
-    if (!edge || edge <= 0 || typeof(edge) !== "number" || !Number.isInteger(edge)) {
-        return `При вычислении произошла ошибка`;
+function getTimeFromMinutes(number) {
+    if (number >= 0 && number < 60) {
+        return console.log(`Это 0 часов и ${number} минут`);
+    } else if (number >= 60) {
+        return console.log(`Это ${Math.floor(number / 60)} часов и ${number % 60} минут`);
     } else {
-        return `Объём куба: ${cubeVolume}, площадь всей поверхности: ${cubeSquare}`
+        return console.log(`Не верно указано число минут`);
     }
 }
 
-calculateVolumeAndArea(5);
+getTimeFromMinutes(256);
 
 // Место для второй задачи
-function getCoupeNumber(number) {
-    if (!number || !Number.isInteger(number) || number < 0) {
+function findMaxNumber(numOne, numTwo, numThree, numFour) {
+    if (!numOne || !numTwo || !numThree || !numFour || typeof(numOne) !== "number" || typeof(numTwo) !== "number" || typeof(numThree) !== "number" || typeof(numFour) !== "number") {
+        return console.log(0);
+    } else {
+        let bigNum = 0;
+        let numArr = [numOne, numTwo, numThree, numFour];
 
-    } else if (number >= 1 && number <= 36) {
-        return Math.ceil(number / 4);
+        for (let i = 0; i < numArr.length; i++) {
+            if (numArr[i] > bigNum) {
+                bigNum = numArr[i];
+            } else {
+                continue;
+            }
+        }
+        return console.log(bigNum);
     }
 }
 
-getCoupeNumber(17);
+findMaxNumber(1, 5, 6.6, 11);
