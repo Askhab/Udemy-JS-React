@@ -85,7 +85,7 @@ log(...num);
 
 const array = ["a", "b"];
 
-const newAarray = [..array];
+const newAarray = [...array];
 
 const q = {
     one: 1,
