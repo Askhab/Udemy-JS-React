@@ -1,46 +1,29 @@
-const personalPlanPeter = {
-    name: "Peter",
-    age: "29",
-    skills: {
-        languages: ['ru', 'eng'],
-        programmingLangs: {
-            js: '20%',
-            php: '10%'
-        },
-        exp: '1 month'
-    }
-};
+const family = ['Peter', 'Ann', 'Alex', 'Linda'];
 
-function showExperience(plan) {
-    let {skills: {exp: experience}} = plan;
-    console.log(`${experience}`);
+function showFamily(arr) {
+    let str = `Семья состоит из: `;
+    if (arr.length === 0) {
+        return console.log(`Семья пуста`);
+    } else {
+        for (let member of family) {
+            str += `${member} `;
+        }
+        return console.log(str);
+    }
 }
 
-showExperience(personalPlanPeter);
+showFamily(family);
 
-function showProgrammingLangs(plan) {
-    let str = ``;
-    let {skills: {programmingLangs}} = plan;
-    if (Object.entries(programmingLangs)) {
-        for (let lang in programmingLangs) {
-            str += `Язык ${lang} изучен на ${programmingLangs[lang]}\n`
+const favoriteCities = ['liSBon', 'ROME', 'miLan', 'Dublin'];
+
+function standardizeStrings(arr) {
+    if (arr.length === 0) {
+        return console.log(`Массив пуст`);
+    } else {
+        for (let city of arr) {
+            console.log(city.toLowerCase());
         }
     }
-    console.log(str);
 }
 
-showProgrammingLangs(personalPlanPeter);
-
-personalPlanPeter.showAgeAndLangs = function(obj) {
-    let {age} = obj;
-    let {skills: {languages}} = obj;
-    let str = `Мне ${age} и я владею языками: `;
-    if (Object.entries(languages)) {
-        for (let lang in languages) {
-            str += `${languages[lang].toUpperCase()} `;
-        }
-    }
-    console.log(str);
-};
-
-personalPlanPeter.showAgeAndLangs(personalPlanPeter);
+standardizeStrings(favoriteCities);
