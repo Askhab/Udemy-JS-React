@@ -1,29 +1,28 @@
-const family = ['Peter', 'Ann', 'Alex', 'Linda'];
+const someString = 'This is some strange string';
 
-function showFamily(arr) {
-    let str = `Семья состоит из: `;
-    if (arr.length === 0) {
-        return console.log(`Семья пуста`);
+function reverse(str) {
+    if (str.length === 0) {
+        console.log(`Ошибка!`);
     } else {
-        for (let member of family) {
-            str += `${member} `;
-        }
-        return console.log(str);
+        console.log(str.split("").reverse().join(""));
     }
 }
 
-showFamily(family);
+reverse(someString);
 
-const favoriteCities = ['liSBon', 'ROME', 'miLan', 'Dublin'];
+const baseCurrencies = ['USD', 'EUR'];
+const additionalCurrencies = ['UAH', 'RUB', 'CNY'];
 
-function standardizeStrings(arr) {
-    if (arr.length === 0) {
-        return console.log(`Массив пуст`);
-    } else {
-        for (let city of arr) {
-            console.log(city.toLowerCase());
+function availableCurr(arr, missingCurr) {
+    let str = ``;
+    arr.length === 0 ? str = `Нет доступных валют` : str = `Доступные валюты:\n`;
+
+    arr.forEach(function(curr) {
+        if (curr !== missingCurr) {
+            str += `${curr}\n`;
         }
-    }
+    });
+    return console.log(str);
 }
 
-standardizeStrings(favoriteCities);
+availableCurr([...baseCurrencies, ...additionalCurrencies], "CNY");
