@@ -1,28 +1,43 @@
-const someString = 'This is some strange string';
+const shoppingMallData = {
+    shops: [
+        {
+            width: 10,
+            length: 5
+        },
+        {
+            width: 15,
+            length: 7
+        },
+        {
+            width: 20,
+            length: 5
+        },
+        {
+            width: 8,
+            length: 10
+        }
+    ],
+    height: 5,
+    moneyPer1m3: 30,
+    budget: 50000
+}
 
-function reverse(str) {
-    if (str.length === 0) {
-        console.log(`Ошибка!`);
+function isBudgetEnough(data) {
+    let {shops} = data;
+    let mallSquare = 0;
+    let mallVolume = 0;
+
+    for (let i of shops) {
+        mallSquare += i.width * i.length;
+    }
+    
+    mallVolume += mallSquare * data.height;
+
+    if (mallVolume * data.moneyPer1m3 > data.budget) {
+        return console.log(`Бюджета недостаточно`);
     } else {
-        console.log(str.split("").reverse().join(""));
+        return console.log(`Бюджета достаточно`);
     }
 }
 
-reverse(someString);
-
-const baseCurrencies = ['USD', 'EUR'];
-const additionalCurrencies = ['UAH', 'RUB', 'CNY'];
-
-function availableCurr(arr, missingCurr) {
-    let str = ``;
-    arr.length === 0 ? str = `Нет доступных валют` : str = `Доступные валюты:\n`;
-
-    arr.forEach(function(curr) {
-        if (curr !== missingCurr) {
-            str += `${curr}\n`;
-        }
-    });
-    return console.log(str);
-}
-
-availableCurr([...baseCurrencies, ...additionalCurrencies], "CNY");
+isBudgetEnough(shoppingMallData);
