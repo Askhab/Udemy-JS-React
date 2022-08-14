@@ -159,16 +159,16 @@ window.addEventListener(`DOMContentLoaded`, () => {
     }
 
     render() {
-        const element = document.createElement(`div`);
+      const element = document.createElement(`div`);
 
-        if (this.classes.length === 0) {
-            this.classes = `menu__item`;
-            element.classList.add(this.classes);
-        } else {
-            this.classes.forEach(className => element.classList.add(className));
-        }
-        
-        element.innerHTML = `
+      if (this.classes.length === 0) {
+        this.classes = `menu__item`;
+        element.classList.add(this.classes);
+      } else {
+        this.classes.forEach((className) => element.classList.add(className));
+      }
+
+      element.innerHTML = `
             <img src=${this.src} alt=${this.alt}>
             <h3 class="menu__item-subtitle">${this.title}</h3>
             <div class="menu__item-descr">${this.descr}</div>
@@ -191,7 +191,7 @@ window.addEventListener(`DOMContentLoaded`, () => {
 
     return await res.json();
   };
-p
+
   // getResource("http://localhost:3000/menu")
   //   .then(data => {
   //     data.forEach(({img, altimg, title, descr, price}) => {
@@ -199,29 +199,37 @@ p
   //     });
   //   });
 
-  getResource("http://localhost:3000/menu")
-    .then(data => createCard(data));
+  // getResource("http://localhost:3000/menu")
+  //   .then(data => createCard(data));
 
-  function createCard(data) {
-    data.forEach(({img, altimg, title, descr, price}) => {
-      const element = document.createElement("div");
+  // function createCard(data) {
+  //   data.forEach(({img, altimg, title, descr, price}) => {
+  //     const element = document.createElement("div");
 
-      element.classList.add("menu__item");
+  //     element.classList.add("menu__item");
 
-      element.innerHTML = `
-        <img src=${img} alt=${altimg}>
-        <h3 class="menu__item-subtitle">${title}</h3>
-        <div class="menu__item-descr">${descr}</div>
-        <div class="menu__item-divider"></div>
-        <div class="menu__item-price">
-            <div class="menu__item-cost">Цена:</div>
-            <div class="menu__item-total"><span>${price}</span> грн/день</div>
-        </div>
-      `;
+  //     element.innerHTML = `
+  //       <img src=${img} alt=${altimg}>
+  //       <h3 class="menu__item-subtitle">${title}</h3>
+  //       <div class="menu__item-descr">${descr}</div>
+  //       <div class="menu__item-divider"></div>
+  //       <div class="menu__item-price">
+  //           <div class="menu__item-cost">Цена:</div>
+  //           <div class="menu__item-total"><span>${price}</span> грн/день</div>
+  //       </div>
+  //     `;
 
-      document.querySelector(".menu .container").append(element);
+  //     document.querySelector(".menu .container").append(element);
+  //   });
+  // }
+
+  axios.get("http://localhost:3000/menu")
+    .then(data => {
+      data.data.forEach(({img, altimg, title, descr, price}) => {
+        new MenuCard(img, altimg, title, descr, price, ".menu .container").render();
+      });
     });
-  }
+
 
   // Forms
 
@@ -230,10 +238,10 @@ p
   const message = {
     loading: `img/form/spinner.svg`,
     success: `Спасибо! Скоро мы с вами свяжемся`,
-    failure: `Что-то пошло не так...`
+    failure: `Что-то пошло не так...`,
   };
 
-  forms.forEach(item => {
+  forms.forEach((item) => {
     bindPostData(item);
   });
 
@@ -241,42 +249,44 @@ p
     const res = await fetch(url, {
       method: `POST`,
       headers: {
-        "Content-type": "application/json"
+        "Content-type": "application/json",
       },
-      body: data
+      body: data,
     });
 
     return await res.json();
   };
-  
+
   function bindPostData(form) {
     form.addEventListener(`submit`, (e) => {
       e.preventDefault();
 
-      const statusMessage = document.createElement('img');
+      const statusMessage = document.createElement("img");
       statusMessage.src = message.loading;
       statusMessage.style.cssText = `
         display: block;
         margin: 0 auto;
       `;
       form.insertAdjacentElement(`afterend`, statusMessage);
-      
+
       // request.setRequestHeader(`Content-type`, `application/json`);
 
       const formData = new FormData(form);
-      
+
       const json = JSON.stringify(Object.fromEntries(formData.entries()));
-      
+
       postData("http://localhost:3000/requests", json)
-      .then(data => {
-        console.log(data);
-        showThanksModal(message.success);
-        statusMessage.remove();
-      }).catch(() => {
-        showThanksModal(message.failure);
-      }).finally(() => {
-        form.reset();
-      });
+        .then((data) => {
+          console.log(data);
+          showThanksModal(message.success);
+          statusMessage.remove();
+        })
+        .catch(() => {
+          showThanksModal(message.failure);
+        })
+        .finally(() => {
+          form.reset();
+        });
     });
   }
 
@@ -305,6 +315,6 @@ p
   }
 
   fetch("http://localhost:3000/menu")
-    .then(data => data.json())
-    .then(res => console.log(res));
+    .then((data) => data.json())
+    .then((res) => console.log(res));
 });
